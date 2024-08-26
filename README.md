@@ -26,7 +26,7 @@ git clone "your-project"
 ```
 
 ```bash
-docker build -t entbappy/stapp:latest . 
+docker build -t rvk2108/modelpilot:latest . 
 ```
 
 ```bash
@@ -34,7 +34,7 @@ docker images -a
 ```
 
 ```bash
-docker run -d -p 8501:8501 entbappy/stapp 
+docker run -d -p 8501:8501 rvk2108/modelpilot
 ```
 
 ```bash
@@ -54,15 +54,15 @@ docker login
 ```
 
 ```bash
-docker push entbappy/stapp:latest 
+docker push rvk2108/modelpilot:latest 
 ```
 
 ```bash
-docker rmi entbappy/stapp:latest
+docker rmi rvk2108/modelpilot:latest
 ```
 
 ```bash
-docker pull entbappy/stapp
+docker pull rvk2108/modelpilot
 ```
 
 
