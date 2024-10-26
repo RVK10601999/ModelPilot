@@ -1,20 +1,23 @@
 import streamlit as st
 import pandas as pd
 from random import randint,choice
+import data_loader_utils as dlu
 
 def generate_random_numbers(min_value, max_value, length):
-    #generate randomly distributed nu,bers between minimu & maximum values based on the row count
+    '''generate randomly distributed nu,bers between minimu & maximum values based on the row count'''
     return [randint(min_value, max_value) for _ in range(length)]
 
 def generate_random_classes(length,class_length):
-    #generate randomly distributed classes based on the row count
+    '''generate randomly distributed classes based on the row count'''
     strings = [f'class_{_}' for _ in range(class_length)]
     return [choice(strings) for _ in range(length)]
 
-#include row count in decision making
-#function to generate independent variables
-#function to generate & load random data
 def app():
+    '''Random Data Generator : \n1. includes row count in decision making
+\n2. function to generate independent variables
+\n3. function to generate & load random data
+
+    '''
     dependent_type = st.radio(
         "What is the kind of data?",
         ["Numerical", "Categorical"],
@@ -37,8 +40,6 @@ def app():
     else:
         cat_count = st.number_input(label=f'No. of categories for target',placeholder='Select No. of classes',value=2,min_value=2)
         df['target'] = pd.DataFrame(generate_random_classes(row_count,cat_count))
-    st.write("Displaying top 5 rows")
-    st.write(df.head())
 
-    return df
+    return df,dlu.get_dependent_var_widget(df)
 

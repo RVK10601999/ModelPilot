@@ -14,9 +14,11 @@ genre = st.radio(
     ],
 )
 
+
+
 if genre == "Use pre-loaded datasets":
-    df = preloader.app()
+    df,dep_var = preloader.app()
 elif genre == "Load a CSV file":
-    df = csv_selector.app()
+    df,dep_var = csv_selector.app()
 else:
-    df = random_data_giver.app()
+    df,dep_var = random_data_giver.app()

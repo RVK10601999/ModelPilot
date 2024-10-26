@@ -1,3 +1,6 @@
 ### dependency
 streamlit
+pandas
+sklearn
+random
 

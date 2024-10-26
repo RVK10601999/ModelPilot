@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
 from sklearn import datasets
+import data_loader_utils as dlu
 
 def get_datasets(d):
+    '''get dataset from sklearn.datasets'''
     # Use dir() to get all attributes of the sklearn.datasets module
     dataset_functions = dir(d)
     # Filter functions that start with "load_" or "fetch_"
@@ -10,6 +12,7 @@ def get_datasets(d):
     return dataset_functions
 
 def load_dataset(datasets,dataset_name):
+    '''load dataset from sklearn.datasets'''
     # Check if the dataset_name exists in sklearn.datasets
     df = pd.DataFrame()
     #checks if selected dataset is available
@@ -43,9 +46,6 @@ def app():
     if option:
         st.write("You selected:", option)
         df = load_dataset(datasets,option)
-        if df.shape[0]:
-            st.write("Displaying top 5 rows")
-            st.write(df.head())
-        return df
+        return df,dlu.get_dependent_var_widget(df)
 
 
