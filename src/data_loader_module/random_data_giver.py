@@ -12,20 +12,12 @@ def generate_random_classes(length,class_length):
     strings = [f'class_{_}' for _ in range(class_length)]
     return [choice(strings) for _ in range(length)]
 
-def app():
+def app(dependent_type):
     '''Random Data Generator : \n1. includes row count in decision making
 \n2. function to generate independent variables
 \n3. function to generate & load random data
 
     '''
-    dependent_type = st.radio(
-        "What is the kind of data?",
-        ["Numerical", "Categorical"],
-        captions=[
-            "Numerical Dependent variable",
-            "Categorical Dependent variable"
-        ],
-    )
     df = pd.DataFrame()
     row_count = st.number_input(label='Count of Rows',placeholder='Select No. of rows',value=10,min_value=10)
     col_count = st.number_input(label='Count of Columns',placeholder='Select No. of columns',value=1,min_value=1)

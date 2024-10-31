@@ -25,12 +25,12 @@ def do_lda(x,y,indep_cols,test_size=0.2):
     return ld_xtr,ld_xts
 
 
-def reduce_dim(df,dep_var,is_class_or_reg):
+def app(df,dep_var,is_class_or_reg):
     indep_cols = [c for c in df.columns if c not in [dep_var]]
     test_size = st.number_input(label=f'Test data size for Dimensionality Reduction Algo',placeholder='Select Value',min_value=0.05, max_value=0.45, value=0.2)
     x = df[indep_cols].values
     y = df[dep_var].values
-    if is_class_or_reg == 'CLS':
+    if is_class_or_reg == "Categorical":
         do_lda(x,y,indep_cols,test_size=0.2)
     else:
         do_pca(x,y,indep_cols,test_size=0.2)
