@@ -1,3 +1,7 @@
+# Here is an image illustrating the project:
+
+![Project Overview](./ModelPilot_drawio.png)
+
 # Streamlit app Docker Image
 
 ## 1. Login with your AWS console and launch an EC2 instance

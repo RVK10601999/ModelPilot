@@ -21,11 +21,11 @@ def app(df,dep_var,is_class_or_reg,ind_cols):
             ["Apply Scaling", "Skip"],
         )
         if scaling_choice == "Apply Scaling":
-            dr_df = sc.app(df[ind_cols])
-            return dr_df
+            sc_df = sc.app(df[ind_cols])
+            return sc_df
         else:
             return df
-    scld_df = apply_scaling(enc_df,ind_cols,dep_var)
+    sc_df = apply_scaling(enc_df,ind_cols,dep_var)
     # Apply or skip Dimensionality Reduction
     def apply_dim_red(df,dep_var,is_class_or_reg):
         #checkbox for dimensionality reduction process
@@ -38,7 +38,7 @@ def app(df,dep_var,is_class_or_reg,ind_cols):
             return dr_df
         else:
             return df
-    dim_red_df = apply_dim_red(scld_df,dep_var,is_class_or_reg)
+    dim_red_df = apply_dim_red(sc_df,dep_var,is_class_or_reg)
     return dim_red_df
 
 

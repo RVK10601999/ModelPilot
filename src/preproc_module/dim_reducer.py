@@ -12,9 +12,9 @@ def do_pca(x,y,indep_cols,test_size=0.2):
     pca = PCA(n_components=n_comps)
     pc_xtr = pca.fit_transform(xtr)
     pc_xts = pca.transform(xts)
-    pc_df = pd.DataFrame(pc_xtr)
-    pc_df['target'] = y
-    return pc_xtr,pc_xts
+    new_df = pd.concat([pd.DataFrame(pc_xtr),pd.DataFrame(pc_xts)],axis=0)
+    new_df['target'] = pd.concat([ytr,yts],axis=0)
+    return new_df
 
 def do_lda(x,y,indep_cols,test_size=0.2):
     xtr,xts,ytr,yts = train_test_split(x, y, test_size=test_size, random_state=123)
@@ -24,9 +24,9 @@ def do_lda(x,y,indep_cols,test_size=0.2):
     lda = LDA(n_components=n_comps)
     ld_xtr = lda.fit_transform(xtr, ytr)
     ld_xts = lda.transform(xts)
-    ld_df = pd.DataFrame(ld_xtr)
-    ld_df['target'] = y
-    return ld_xtr,ld_xts
+    new_df = pd.concat([pd.DataFrame(ld_xtr),pd.DataFrame(ld_xts)],axis=0)
+    new_df['target'] = pd.concat([ytr,yts],axis=0)
+    return new_df
 
 
 def app(df,dep_var,is_class_or_reg):
@@ -35,6 +35,6 @@ def app(df,dep_var,is_class_or_reg):
     x = df[indep_cols].values
     y = df[dep_var].values
     if is_class_or_reg == "Categorical":
-        do_lda(x,y,indep_cols,test_size=0.2)
+        return do_lda(x,y,indep_cols,test_size)
     else:
-        do_pca(x,y,indep_cols,test_size=0.2)
+        return do_pca(x,y,indep_cols,test_size)
