@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-def scaler(xtr,xts,ytr,yts):
+def scaler(xtr,xts,ytr,yts) -> pd.DataFrame:
     # Create a StandardScaler instance
     stdsclr = StandardScaler()
     # Fit and transform the data
@@ -14,7 +14,7 @@ def scaler(xtr,xts,ytr,yts):
     new_df['target'] = pd.concat([ytr,yts],axis=0)
     return new_df
 
-def normer(xtr,xts,ytr,yts):
+def normer(xtr,xts,ytr,yts) -> pd.DataFrame:
     # Create a MinMaxScaler instance
     mnmxsclr = MinMaxScaler()
     # Fit and transform the data
@@ -24,7 +24,7 @@ def normer(xtr,xts,ytr,yts):
     new_df['target'] = pd.concat([ytr,yts],axis=0)
     return new_df
 
-def app(df,indep_cols,dep_var):
+def app(df,indep_cols,dep_var) -> pd.DataFrame:
     scaling_choice = st.radio(
         "What do you want to do?",
         ["Normalization", "Standardization"],
@@ -34,9 +34,7 @@ def app(df,indep_cols,dep_var):
     y = df[dep_var].values
     xtr,xts,ytr,yts = train_test_split(x, y, test_size=test_size, random_state=123)
     if scaling_choice == "Normalization":
-        sc_xtr,sc_xts = normer(xtr,xts)
+        new_df = normer(xtr,xts,ytr,yts)
     else:
-        sc_xtr,sc_xts = scaler(xtr,xts)
-    return sc_xtr
-
-
+        new_df = scaler(xtr,xts,ytr,yts)
+    return new_df

@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-def app(df):
+def app(df) -> pd.DataFrame:
     for c in df.columns:
         print(df[c].dtypes)
         q1 = np.percentile(df[c], 25, method='midpoint')

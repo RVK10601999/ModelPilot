@@ -2,17 +2,18 @@ import streamlit as st
 import pandas as pd
 from random import randint,choice
 import data_loader_utils as dlu
+from typing import List,Tuple
 
-def generate_random_numbers(min_value, max_value, length):
+def generate_random_numbers(min_value, max_value, length) -> List:
     '''generate randomly distributed nu,bers between minimu & maximum values based on the row count'''
     return [randint(min_value, max_value) for _ in range(length)]
 
-def generate_random_classes(length,class_length):
+def generate_random_classes(length,class_length) -> List:
     '''generate randomly distributed classes based on the row count'''
     strings = [f'class_{_}' for _ in range(class_length)]
     return [choice(strings) for _ in range(length)]
 
-def app(dependent_type):
+def app(dependent_type) -> Tuple[pd.DataFrame, List]:
     '''Random Data Generator : \n1. includes row count in decision making
 \n2. function to generate independent variables
 \n3. function to generate & load random data
