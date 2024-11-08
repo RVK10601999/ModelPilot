@@ -11,7 +11,7 @@ def scaler(xtr,xts,ytr,yts) -> pd.DataFrame:
     sc_xtr = stdsclr.fit_transform(xtr)
     sc_xts = stdsclr.transform(xts)
     new_df = pd.concat([pd.DataFrame(sc_xtr),pd.DataFrame(sc_xts)],axis=0)
-    new_df['target'] = pd.concat([ytr,yts],axis=0)
+    new_df['target'] = pd.concat([pd.DataFrame(ytr),pd.DataFrame(yts)],axis=0)
     return new_df
 
 def normer(xtr,xts,ytr,yts) -> pd.DataFrame:
@@ -21,7 +21,7 @@ def normer(xtr,xts,ytr,yts) -> pd.DataFrame:
     sc_xtr = mnmxsclr.fit_transform(xtr)
     sc_xts = mnmxsclr.transform(xts)
     new_df = pd.concat([pd.DataFrame(sc_xtr),pd.DataFrame(sc_xts)],axis=0)
-    new_df['target'] = pd.concat([ytr,yts],axis=0)
+    new_df['target'] = pd.concat([pd.DataFrame(ytr),pd.DataFrame(yts)],axis=0)
     return new_df
 
 def app(df,indep_cols,dep_var) -> pd.DataFrame:

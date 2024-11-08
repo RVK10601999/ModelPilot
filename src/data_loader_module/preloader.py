@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sklearn import datasets
-import data_loader_utils as dlu
+from data_loader_module import data_loader_utils as dlu
 from typing import List,Tuple
 
 def get_datasets(d) -> List:

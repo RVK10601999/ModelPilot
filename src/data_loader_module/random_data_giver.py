@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from random import randint,choice
-import data_loader_utils as dlu
+from data_loader_module import data_loader_utils as dlu
 from typing import List,Tuple
 
 def generate_random_numbers(min_value, max_value, length) -> List:
@@ -21,7 +21,7 @@ def app(dependent_type) -> Tuple[pd.DataFrame, List]:
     '''
     df = pd.DataFrame()
     row_count = st.number_input(label='Count of Rows',placeholder='Select No. of rows',value=10,min_value=10)
-    col_count = st.number_input(label='Count of Columns',placeholder='Select No. of columns',value=1,min_value=1)
+    col_count = st.number_input(label='Count of Columns',placeholder='Select No. of columns',value=4,min_value=4)
     for c in range(0, col_count):
         min_val = st.number_input(label=f'Minimum Value for column#{c}',placeholder='Select Minimum Value',value=0)
         max_val = st.number_input(label=f'Maximum Value for column#{c}',placeholder='Select Maximum Value',value=100)
@@ -31,7 +31,7 @@ def app(dependent_type) -> Tuple[pd.DataFrame, List]:
         max_val = st.number_input(label=f'Maximum Value for target',placeholder='Select Maximum Value',value=100)
         df['target'] = pd.DataFrame(generate_random_numbers(min_val, max_val, row_count))
     else:
-        cat_count = st.number_input(label=f'No. of categories for target',placeholder='Select No. of classes',value=2,min_value=2)
+        cat_count = st.number_input(label=f'No. of categories for target',placeholder='Select No. of classes',value=4,min_value=2)
         df['target'] = pd.DataFrame(generate_random_classes(row_count,cat_count))
 
     return df,dlu.get_dependent_var_widget(df)

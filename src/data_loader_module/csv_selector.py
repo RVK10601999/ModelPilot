@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-import data_loader_utils as dlu
+from data_loader_module import data_loader_utils as dlu
+from typing import Tuple
 
 def app() -> Tuple[pd.DataFrame,str]:
     '''function to load csv file(supports selecting multiple files)'''
