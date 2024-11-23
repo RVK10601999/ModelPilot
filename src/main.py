@@ -1,5 +1,7 @@
 from data_loader_module import main as dlm_app
 from preproc_module import main as ppm_app
+from models_module import main as mdl_app
+from pickler_module import main as pkl_app
 import streamlit as st
 
 # Initialize the session state for tracking the current page
@@ -40,13 +42,13 @@ elif st.session_state.page == 2:
     st.button("Next", on_click=next_page)
 
 elif st.session_state.page == 3:
-    st.title("Page 3")
-    st.write("Welcome to Model Building Page")
+    st.session_state.indep_ls = [i for i in st.session_state.processed_df.columns if i!=st.session_state.dep_var]
+    fitted_model = mdl_app.app(st.session_state.processed_df,st.session_state.indep_ls,st.session_state.dep_var,st.session_state.dependent_type)
+    st.session_state.fitted_model = fitted_model
     st.button("Previous", on_click=prev_page)
     st.button("Next", on_click=next_page)
 
 elif st.session_state.page == 4:
-    st.title("Page 4")
-    st.write("Welcome to Model Pickler Page")
+    pkl_app.app(st.session_state.fitted_model)
     st.button("Previous", on_click=prev_page)
     st.button("Restart", on_click=lambda: st.session_state.update({"page": 1}))

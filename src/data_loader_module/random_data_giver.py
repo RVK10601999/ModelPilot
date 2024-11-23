@@ -23,9 +23,11 @@ def app(dependent_type) -> Tuple[pd.DataFrame, List]:
     row_count = st.number_input(label='Count of Rows',placeholder='Select No. of rows',value=10,min_value=10)
     col_count = st.number_input(label='Count of Columns',placeholder='Select No. of columns',value=4,min_value=4)
     for c in range(0, col_count):
+        st.header(f'column#{c}')
         min_val = st.number_input(label=f'Minimum Value for column#{c}',placeholder='Select Minimum Value',value=0)
         max_val = st.number_input(label=f'Maximum Value for column#{c}',placeholder='Select Maximum Value',value=100)
         df[f'column#{c}'] = pd.DataFrame(generate_random_numbers(min_val, max_val, row_count))
+    st.header(f'target')
     if dependent_type=='Numerical':
         min_val = st.number_input(label=f'Minimum Value for target',placeholder='Select Minimum Value',value=0)
         max_val = st.number_input(label=f'Maximum Value for target',placeholder='Select Maximum Value',value=100)
