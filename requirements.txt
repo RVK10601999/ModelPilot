@@ -1,6 +1,9 @@
 ### dependency
 streamlit
 pandas
+numpy
 sklearn
 random
-
+typing
+sklearn
+tkinter
