@@ -48,15 +48,16 @@ elif st.session_state.page == 3:
     st.session_state.number_of_top_models = st.number_input(label="GET TOP N BEST PERFORMING MODEL VIA GRID SEARCH CV METHOD",placeholder="ENTER A NUMBER",min_value=1, max_value=7, value=3)
     st.session_state.top_models = mdl_app.app(st.session_state.processed_df,st.session_state.number_of_top_models,st.session_state.indep_ls,st.session_state.dep_var,st.session_state.dependent_type,cat_param_grid,regression_model_params)
     model_name_ls = [str(list(i.values())) for i in st.session_state.top_models]
-    models = [str(list(i.values())[0]) for i in st.session_state.top_models]
+    # models = [str(list(i.values())[0]) for i in st.session_state.top_models]
+    models_perf_stats = [str(list(i.keys())) for i in st.session_state.top_models]
     model_zip_dc = dict(zip(model_name_ls,[list(i.values())[0] for i in st.session_state.top_models]))
     print(model_zip_dc)
-    print(models)
+    print(models_perf_stats)
     print(model_name_ls)
     trained_model = st.radio(
         "What model would you like to use?",
         options=model_name_ls,
-        captions=models
+        captions=models_perf_stats
     )    
     st.session_state.fitted_model = model_zip_dc[trained_model] 
     st.button("Previous", on_click=prev_page)

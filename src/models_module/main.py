@@ -29,7 +29,7 @@ def top_models_with_hyperparameter_tuning(X_train, y_train, X_test, y_test, mode
                 })
             except Exception as e:
                 print(f"Error with {model_name}: {e}")
-        models_dc = sorted(results,key=lambda x:x["Best Score"],reverse=True)[:top_n]
+        models_dc = sorted(results,key=lambda x:x["Best Score"])[:top_n]
     elif dependent_type=='Categorical':
         for model_name, config in model_param_grid.items():
             print(f"Running GridSearchCV for {model_name}...")
